@@ -22,7 +22,7 @@ pipeline {
       steps {
         echo 'Deploying only because of code commit...'
         echo 'Deploying to  dev environent....'
-        bat 'mvn clean deploy -Pdev -DmuleDeploy'
+        bat 'mvn clean deploy -Pdev -DmuleDeploy' 
       }
 	  
 	}

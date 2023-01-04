@@ -30,37 +30,33 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+					<cloudhub2Deployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<provider>MC</provider>
+						<environment>dev</environment>
+						<target>afm-ps</target>
+						<muleVersion>4.4.0</muleVersion>
+						<username>sonalpatidar30Dec</username>
+						<password>SonalMule@123</password>
+						<applicationName>${appName}</applicationName>
+						<replicas>1</replicas>
+						<vCores>1</vCores>
+						<deploymentSettings>
+							<http>
+								<inbound>
+									<publicUrl>myapp.anypoint.com</publicUrl>
+									<forwardSslSession>true</forwardSslSession>
+									<lastMileSecurity>true</lastMileSecurity>
+								</inbound>
+							</http>
+						</deploymentSettings>
+					</cloudhub2Deployment>
 					<sharedLibraries>
 						<sharedLibrary>
 							<groupId>com.mycompany</groupId>
 							<artifactId>ojdbc8</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
-				</configuration>
-				<configuration>
-					
-				    <cloudhub2Deployment>
-				      <uri>https://anypoint.mulesoft.com</uri>
-				      <provider>MC</provider>
-				      <environment>dev</environment>
-				      <target>afm-ps</target>
-				      <muleVersion>4.4.0</muleVersion>
-				      <username>sonalpatidar30Dec</username>
-				      <password>SonalMule@123</password>
-				      <applicationName>${appName}</applicationName>
-				      <replicas>1</replicas>
-				      <vCores>1</vCores>
-				      <deploymentSettings>
-				        <http>
-				          <inbound>
-				            <publicUrl>myapp.anypoint.com</publicUrl>
-				            <forwardSslSession>true</forwardSslSession>
-				            <lastMileSecurity>true</lastMileSecurity>
-				          </inbound>
-				        </http>
-				      </deploymentSettings>
-				    </cloudhub2Deployment>
- 
 				</configuration>
 			</plugin>
 		</plugins>
