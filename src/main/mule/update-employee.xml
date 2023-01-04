@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="update-employeeFlow" doc:id="1fad0284-b216-4900-8053-a5a082f8e5e2" >
+		<http:listener doc:name="update Listener" doc:id="c1d57b2e-87d3-48f0-9a1b-6fa203311ad6" config-ref="HTTP_Listener_config" path="/update-employee" allowedMethods="PUT"/>
+		<logger level="INFO" doc:name="start Log" doc:id="b841788a-e94a-40f0-9369-89fa2a8e4cd0" message="update-employee logger"/>
+		<ee:transform doc:name="set input params" doc:id="f192e56c-3d64-45de-9699-201353ed34e2" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable resource="dwl/set-db-input-params.dwl" variableName="inputParam" />
+			</ee:variables>
+		</ee:transform>
+		<db:update doc:name="Update" doc:id="a196fe3b-7c61-4a3b-b6eb-9ded2f756fd1" config-ref="Database_Config">
+			<db:sql ><![CDATA[update emp set emp_status=:empStatus where emp_id=:empID]]></db:sql>
+			<db:input-parameters ><![CDATA[#[vars.inputParam]]]></db:input-parameters>
+		</db:update>
+		<ee:transform doc:name="Transform Message" doc:id="2c6e9f57-582e-43bf-a168-f9ac1fb70645" >
+			<ee:message >
+				<ee:set-payload resource="dwl/update-employee-success-response.dwl" />
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="end Logger" doc:id="d6f6a401-84d6-4b41-829b-7549b0052228" message="updated"/>
+	</flow>
+</mule>
