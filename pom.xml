@@ -38,7 +38,7 @@
 						<muleVersion>4.4.0</muleVersion>
 						<username>sonalpatidar30Dec</username>
 						<password>SonalMule@123</password>
-						<applicationName>${project.artifactId}</applicationName>
+						<applicationName>7oct-emp-sapi</applicationName>
 						<replicas>1</replicas>
 						<vCores>1</vCores>
 						<deploymentSettings>
