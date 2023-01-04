@@ -36,6 +36,8 @@
 							<artifactId>ojdbc8</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
+				</configuration>
+				<configuration>
 					
 				    <cloudhub2Deployment>
 				      <uri>https://anypoint.mulesoft.com</uri>
