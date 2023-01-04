@@ -9,22 +9,10 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d98eaca8-f437-41f1-b1fe-4678ef6b80f8">
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<db:config name="Database_Config" doc:name="Database Config" doc:id="74f4a7e8-c3a1-43be-9a96-5fab7dcf3878" >
-		<db:oracle-connection host="localhost" user="system" password="root" instance="XE" />
-	</db:config>
 	<flow name="create-employeeFlow" doc:id="af3a7346-f6e0-4188-a0c6-bae453b4b9b0" >
 		<http:listener doc:name="create employee Listener" doc:id="5c8a451c-2823-4109-b1ad-0c0a36f8761d" config-ref="HTTP_Listener_config" path="/create-employee"/>
 		<logger level="INFO" doc:name="start Logger" doc:id="0aee86f9-e883-441b-ad07-7d2f7142a5b8" message="the flow started"/>
 		<set-variable value="#[payload]" doc:name="Set Variable" doc:id="5d2d5a6e-bfa2-47e0-a54c-8a0d1543ee42" variableName="empPayload"/>
-		<db:insert doc:id="46c7fbec-a87d-4c30-8b64-9274392d8866" config-ref="Database_Config" target="empRecords">
-			<db:sql ><![CDATA[insert into emp(emp_id,emp_name,emp_status)values (:empID,:empName,:empStatus)]]></db:sql>
-			<db:input-parameters ><![CDATA[#[{
-	empID: payload.employeeID,
-	empName: payload.employeeName,
-	empStatus: payload.employeeStatus
-	
-}]]]></db:input-parameters>
-		</db:insert>
 		<ee:transform doc:name="Transform Message" doc:id="0a3f9f04-b0ce-4b9a-937f-88d31d5ec498" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
